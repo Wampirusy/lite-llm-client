@@ -1,0 +1,25 @@
+{
+    "name": "wampirusy/lite-llm-clien",
+    "description": "liteLLM client for PDFfiller!!!!",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "PDFfiller\\LiteLLMClient\\": "src/",
+            "PDFfiller\\PhoenixChecker\\": "ssrc/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wampirusy",
+            "email": "wampirusy@gmail.com"
+        }
+    ]
+}
