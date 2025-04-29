@@ -2,23 +2,22 @@
 
 namespace PDFfiller\LiteLLMClient\Exceptions;
 
-use GuzzleHttp\Exception\GuzzleException;
+use OpenAI\Responses\Chat\CreateResponse;
 
 class LiteLLMClientException extends \Exception
 {
-    public static function createFromGuzzleException(GuzzleException $exception): self
+    private ?CreateResponse $response;
+
+    public static function createInvalidResponseException(CreateResponse $response): self
     {
-        return new self(
-            'Call to LiteLLM service failed with message: '.$exception->getMessage(),
-            $exception->getCode() ?: 400
-        );
+        $exception = new self('Invalid response', 400);
+        $exception->response = $response;
+
+        return $exception;
     }
 
-    public static function createInvalidDataException(mixed $rawData): self
+    public function getResponse(): ?CreateResponse
     {
-        $rawData = is_array($rawData) ? json_encode($rawData) : (string)$rawData;
-        $rawData = strlen($rawData) > 100 ? substr($rawData, 0, 100).'...' : $rawData;
-
-        return new self('Invalid response from LiteLLM service: '.$rawData, 400);
+        return $this->response;
     }
 }

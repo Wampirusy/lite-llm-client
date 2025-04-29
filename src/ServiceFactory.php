@@ -2,22 +2,28 @@
 
 namespace PDFfiller\LiteLLMClient;
 
-use PDFfiller\LiteLLMClient\Enums\ServiceType;
 use PDFfiller\LiteLLMClient\Services\JsonService;
+use PDFfiller\LiteLLMClient\Services\SynonymsService;
 use PDFfiller\LiteLLMClient\Services\TextService;
-use PDFfiller\LiteLLMClient\Services\LiteLLMServiceAbstract;
 
 class ServiceFactory
 {
-    public function __construct(private readonly LiteLLMClient $client)
+    public function __construct(private readonly string $host, private readonly string $token)
     {
     }
 
-    public function createService(ServiceType $type): LiteLLMServiceAbstract
+    public function createTextService(): TextService
     {
-        return match ($type) {
-            ServiceType::text => new TextService($this->client),
-            ServiceType::json => new JsonService($this->client),
-        };
+        return new TextService($this->host, $this->token);
+    }
+
+    public function createJsonService(): JsonService
+    {
+        return new JsonService($this->host, $this->token);
+    }
+
+    public function createSynonymsService(): SynonymsService
+    {
+        return new SynonymsService($this->host, $this->token);
     }
 }
