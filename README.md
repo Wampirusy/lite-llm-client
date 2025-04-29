@@ -7,7 +7,7 @@ Add repository to the composer.json
 "repositories": [
     {
         "type": "vcs",
-        "url": "git@github.com:wampirusy/lite-llm-clien.git"
+        "url": "git@github.com:wampirusy/lite-llm-client.git"
     }
 ]
 ```
@@ -15,7 +15,7 @@ Add repository to the composer.json
 Run the composer installer:
 
 ```bash
-  php composer require wampirusy/lite-llm-clien
+  php composer require wampirusy/lite-llm-client
 ```
 
 ## Using
